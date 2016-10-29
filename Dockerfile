@@ -14,13 +14,6 @@ RUN apt-get update \
 COPY conf/ flink-1.2-SNAPSHOT/conf/
 WORKDIR flink-1.2-SNAPSHOT
 
-# The appmaster expects certain files to be in the sandbox directory
-RUN ln -s conf/log4j.properties log4j.properties \
-    && ln -s lib/flink-dist_2.10-1.2-SNAPSHOT.jar flink.jar \
-    && ln -s lib/flink-python_2.10-1.2-SNAPSHOT.jar flink-python_2.10-1.2-SNAPSHOT.jar \
-    && ln -s lib/log4j-1.2.17.jar log4j-1.2.17.jar \
-    && ln -s lib/slf4j-log4j12-1.7.7.jar slf4j-log4j12-1.7.7.jar
-
 ENV _CLIENT_SHIP_FILES flink-python_2.10-1.2-SNAPSHOT.jar,log4j-1.2.17.jar,slf4j-log4j12-1.7.7.jar,log4j.properties
 ENV _FLINK_CLASSPATH *
 
@@ -38,4 +31,4 @@ CMD ln -s $(pwd)/lib/flink-dist_2.10-1.2-SNAPSHOT.jar $MESOS_SANDBOX/flink.jar \
     && ln -s $(pwd)/lib/slf4j-log4j12-1.7.7.jar $MESOS_SANDBOX/slf4j-log4j12-1.7.7.jar \
     && ln -s $(pwd)/conf/flink-conf.yaml $MESOS_SANDBOX/flink-conf.yaml \
     && ln -s $(pwd)/conf/log4j.properties $MESOS_SANDBOX/log4j.properties \
-    && $JAVA_HOME/bin/java -cp "*" -Dlog.file=jobmaster.log -Dlog4j.configuration=file:log4j.properties org.apache.flink.mesos.runtime.clusterframework.MesosApplicationMasterRunner --configDir .
+    && $JAVA_HOME/bin/java -cp "lib/*" -Dlog.file=jobmaster.log -Dlog4j.configuration=file:log4j.properties org.apache.flink.mesos.runtime.clusterframework.MesosApplicationMasterRunner --configDir .

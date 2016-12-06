@@ -12,9 +12,6 @@ COPY conf/ flink-1.2-SNAPSHOT/conf/
 
 WORKDIR flink-1.2-SNAPSHOT
 
-# Those files are required to be inside the working directory.
-RUN ln -s conf/log4j.properties log4j.properties # TODO working directory?
-
 ENV FLINK_HOME /flink-1.2-SNAPSHOT
 ENV FLINK_CONF_DIR /flink-1.2-SNAPSHOT/conf
 

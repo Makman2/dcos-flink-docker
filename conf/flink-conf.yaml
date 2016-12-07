@@ -20,10 +20,16 @@
 # Mesos
 #==============================================================================
 
-mesos.master: zk://zk-1.zk:2181/mesos
+mesos.master: zk://leader.mesos:2181
 mesos.failover-timeout: 60
+
+# Initial TaskManagers to spawn.
+mesos.initial-tasks: 1
+
+# Mesos relevant TaskManager settings.
 mesos.resourcemanager.tasks.container.type: mesos
 mesos.resourcemanager.tasks.container.image.name: openjdk:8-jre
+mesos.resourcemanager.tasks.mem: 1024
 
 #==============================================================================
 # Common
@@ -56,13 +62,16 @@ taskmanager.numberOfTaskSlots: 1
 
 taskmanager.memory.preallocate: false
 
-# The parallelism used for programs that did not specify and other parallelism.
-
+# The parallelism used for programs that did not specify any other parallelism.
 parallelism.default: 1
 
 #==============================================================================
 # Web Frontend
 #==============================================================================
+
+# The port to serve the Flink Dashboard on.
+
+jobmanager.web.port: 8081
 
 # Flag to specify whether job submission is enabled from the web-based
 # runtime monitor. Uncomment to disable.

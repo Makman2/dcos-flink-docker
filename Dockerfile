@@ -15,8 +15,4 @@ WORKDIR flink-1.2-SNAPSHOT
 ENV FLINK_HOME /flink-1.2-SNAPSHOT
 ENV FLINK_CONF_DIR /flink-1.2-SNAPSHOT/conf
 
-CMD cd "$MESOS_SANDBOX" \
-    && "$FLINK_HOME/bin/mesos-appmaster.sh" -Dmesos.resourcemanager.tasks.mem=1024 \
-                                            -Dtaskmanager.numberOfTaskSlots=2 \
-                                            -Dmesos.initial-tasks=1 \
-                                            -Djobmanager.web.port=$PORT0
+CMD cd "$MESOS_SANDBOX" && "$FLINK_HOME/bin/mesos-appmaster.sh"

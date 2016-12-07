@@ -20,7 +20,7 @@
 # Mesos
 #==============================================================================
 
-mesos.master: zk://leader.mesos:2181
+mesos.master: zk://leader.mesos:2181/mesos
 mesos.failover-timeout: 60
 
 # Initial TaskManagers to spawn.
